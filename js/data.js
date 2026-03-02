@@ -12,11 +12,11 @@ const MOTIONS = [
 ];
 
 const TOURNAMENTS = [
-  { id: '1', name: 'World Universities Debating Championship 2025', region: 'Panama', fee: 'Team fee varies', requirement: 'University team, qualified via regional', link: 'https://wudc2025.calicotab.com/', ongoing: true },
-  { id: '2', name: 'National Middle School Debate Championship 2025', region: 'USA', fee: 'School registration', requirement: 'Middle school teams', link: 'https://nmdc2025.calicotab.com/', ongoing: true },
-  { id: '3', name: 'Seasons Novice British Parliamentary 2025', region: 'Online', fee: 'Free / low fee', requirement: 'Novice debaters', link: 'https://seasons.calicotab.com/', ongoing: true },
-  { id: '4', name: 'Asian British Parliamentary Championship', region: 'Asia', fee: '~$50–100 per team', requirement: 'Asian institution', ongoing: false },
-  { id: '5', name: 'European Universities Debating Championship', region: 'Europe', fee: 'Varies by host', requirement: 'European university', ongoing: false },
+  { id: '1', name: 'World Universities Debating Championship 2026', region: 'TBD', fee: 'Team fee varies', requirement: 'University team, qualified via regional', link: 'https://wudc.debate.earth/', ongoing: true },
+  { id: '2', name: 'Asian British Parliamentary Championship 2026', region: 'Asia', fee: '~$50–100 per team', requirement: 'Asian institution', link: '', ongoing: true },
+  { id: '3', name: 'European Universities Debating Championship 2026', region: 'Europe', fee: 'Varies by host', requirement: 'European university', link: '', ongoing: true },
+  { id: '4', name: 'Seasons Novice British Parliamentary 2026', region: 'Online', fee: 'Free / low fee', requirement: 'Novice debaters', link: 'https://seasons.calicotab.com/', ongoing: true },
+  { id: '5', name: 'National Schools / Universities Championships 2026', region: 'Various', fee: 'School or team registration', requirement: 'Regional qualification', link: '', ongoing: false },
 ];
 
 const BP_SLOTS = [
