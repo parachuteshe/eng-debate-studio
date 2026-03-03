@@ -19,6 +19,16 @@ const TOURNAMENTS = [
   { id: '5', name: 'National Schools / Universities Championships 2026', region: 'Various', fee: 'School or team registration', requirement: 'Regional qualification', link: '', ongoing: false },
 ];
 
+// 精选辩论稿（真实辩稿，来源 Debating404 等）
+// 参考 https://debating404.com/category/debate-transcripts/
+const FEATURED_TRANSCRIPTS = [
+  { id: 'ft-1', event: 'WSDC 2025', title: 'Panama WSDC 2025 Grand Final (India vs Australia)', motion: 'This House prefers a world with a strong belief in Seriti', link: 'https://debating404.com/category/debate-transcripts/', source: 'Debating404' },
+  { id: 'ft-2', event: 'WSDC 2017', title: 'Indonesia WSDC 2017 Grand Final (England vs Singapore)', motion: 'This House supports restrictions on free speech to combat the rise of right-wing populism', link: 'https://debating404.com/category/debate-transcripts/', source: 'Debating404' },
+  { id: 'ft-3', event: 'WSDC 2024', title: 'Serbia WSDC 2024 Semi Finals (Bulgaria vs Greece)', motion: 'This House would allow violent offenders to opt into Pavlovian conditioning as a substitution for prison time', link: 'https://debating404.com/category/debate-transcripts/', source: 'Debating404' },
+  { id: 'ft-4', event: 'WSDC 2024', title: 'Serbia WSDC 2024 Grand Final (Scotland vs Bulgaria)', motion: 'This House regrets the glorification of champions', link: 'https://debating404.com/category/debate-transcripts/', source: 'Debating404' },
+  { id: 'ft-5', event: 'WUDC 2016', title: 'Thessaloniki WUDC 2016 Open Finals [Opening Half]', motion: "This House believes that the world's poor would be justified in pursuing complete Marxist revolution", link: 'https://debating404.com/category/debate-transcripts/', source: 'Debating404' },
+];
+
 const BP_SLOTS = [
   { id: 'OG-PM', role: 'Prime Minister', team: 'Opening Government' },
   { id: 'OG-DPM', role: 'Deputy PM', team: 'Opening Government' },

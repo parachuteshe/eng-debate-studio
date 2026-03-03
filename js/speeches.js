@@ -39,29 +39,80 @@
     return (getProfile().favoriteSpeeches || []).includes(speechId);
   }
 
+  function getFeaturedFiltered(q) {
+    if (typeof FEATURED_TRANSCRIPTS === 'undefined') return [];
+    const lower = q.toLowerCase();
+    return FEATURED_TRANSCRIPTS.filter(
+      (t) =>
+        !lower ||
+        (t.title && t.title.toLowerCase().includes(lower)) ||
+        (t.motion && t.motion.toLowerCase().includes(lower)) ||
+        (t.event && t.event.toLowerCase().includes(lower))
+    );
+  }
+
+  function renderFeatured() {
+    const q = (document.getElementById('speech-search')?.value || '').trim();
+    const list = getFeaturedFiltered(q);
+    const container = document.getElementById('speeches-featured');
+    if (!container) return;
+    container.innerHTML = list.length
+      ? list
+          .map(
+            (t) => `
+        <div class="transcript-card card">
+          <span class="transcript-event">${EngDebate.escapeHtml(t.event || '')}</span>
+          <h3 class="transcript-title">${EngDebate.escapeHtml(t.title || '')}</h3>
+          <p class="transcript-motion">${EngDebate.escapeHtml(t.motion || '')}</p>
+          <div class="transcript-actions">
+            <a href="${t.link || '#'}" target="_blank" rel="noopener" class="btn btn-primary">阅读全文</a>
+            <button type="button" class="btn btn-ghost transcript-fav" data-id="${t.id}" title="收藏">${isFavorite(t.id) ? '★ 已收藏' : '☆ 收藏'}</button>
+          </div>
+        </div>
+      `
+          )
+          .join('')
+      : '<div class="empty-state"><p class="text-muted">暂无匹配的精选辩稿</p></div>';
+
+    container.querySelectorAll('.transcript-fav').forEach((btn) => {
+      btn.addEventListener('click', function () {
+        const id = this.getAttribute('data-id');
+        toggleFavorite(id);
+        renderFeatured();
+        if (window.EngDebate && window.EngDebate.renderProfile) window.EngDebate.renderProfile();
+      });
+    });
+  }
+
   function render() {
     const q = (document.getElementById('speech-search')?.value || '').toLowerCase().trim();
     let list = getSpeeches();
-    if (q) list = list.filter(s => (s.title + ' ' + (s.text || '')).toLowerCase().includes(q));
+    if (q) list = list.filter((s) => (s.title + ' ' + (s.text || '')).toLowerCase().includes(q));
 
     const container = document.getElementById('speeches-list');
     if (!container) return;
     container.innerHTML = list.length
-      ? list.map(s => `
+      ? list
+          .map(
+            (s) => `
         <div class="list-item">
           <div>
             <div class="card-title">${EngDebate.escapeHtml(s.title)}</div>
-            <div class="meta">${s.source ? '来源: ' + s.source : ''} ${s.url ? '· URL' : ''}</div>
-            ${(s.text || '').slice(0, 120)}${(s.text && s.text.length > 120) ? '…' : ''}
+            <div class="meta">${s.source ? '来源: ' + EngDebate.escapeHtml(s.source) : ''} ${s.url ? '· URL' : ''}</div>
+            ${(s.text || '').slice(0, 120)}${s.text && s.text.length > 120 ? '…' : ''}
           </div>
           <button type="button" class="btn btn-ghost" data-id="${s.id}" data-fav="${isFavorite(s.id)}" title="收藏">${isFavorite(s.id) ? '★' : '☆'}</button>
         </div>
-      `).join('')
-      : '<div class="empty-state"><div class="icon">📜</div><p>暂无辩稿，可上传或粘贴 URL 添加</p></div>';
+      `
+          )
+          .join('')
+      : '<div class="empty-state"><div class="icon">📜</div><p>暂无自己添加的辩稿</p></div>';
 
-    container.querySelectorAll('[data-id]').forEach(btn => {
+    container.querySelectorAll('[data-id]').forEach((btn) => {
+      if (btn.classList.contains('transcript-fav')) return;
       btn.addEventListener('click', function () {
         const id = this.getAttribute('data-id');
+        if (!id || id.startsWith('ft-')) return;
         toggleFavorite(id);
         render();
         if (window.EngDebate && window.EngDebate.renderProfile) window.EngDebate.renderProfile();
@@ -69,9 +120,14 @@
     });
   }
 
+  function renderAll() {
+    renderFeatured();
+    render();
+  }
+
   async function fetchTranscriptFromUrl(url) {
-    if (!url || !url.includes('youtube.com') && !url.includes('youtu.be')) return null;
-    return '[Demo] 粘贴 YouTube 等 URL 时，可接入 transcript API 或 oEmbed；此处为占位文本。请直接在下方文本框粘贴或上传辩稿内容。';
+    if (!url || (!url.includes('youtube.com') && !url.includes('youtu.be'))) return null;
+    return '[Demo] 粘贴 YouTube 等 URL 时，可接入 transcript API；请直接在下方文本框粘贴或上传辩稿内容。';
   }
 
   document.getElementById('speech-file')?.addEventListener('change', function (e) {
@@ -80,7 +136,7 @@
     const r = new FileReader();
     r.onload = function () {
       const ta = document.getElementById('speech-text');
-      if (ta) ta.value = (r.result || '');
+      if (ta) ta.value = r.result || '';
     };
     r.readAsText(file, 'UTF-8');
     e.target.value = '';
@@ -96,7 +152,7 @@
       return;
     }
     if (url && !text) {
-      text = await fetchTranscriptFromUrl(url) || '（请粘贴或上传辩稿内容）';
+      text = (await fetchTranscriptFromUrl(url)) || '（请粘贴或上传辩稿内容）';
     }
     const speeches = getSpeeches();
     const id = 's' + Date.now();
@@ -115,15 +171,15 @@
     render();
   });
 
-  document.getElementById('speech-search-btn')?.addEventListener('click', render);
+  document.getElementById('speech-search-btn')?.addEventListener('click', renderAll);
   document.getElementById('speech-search')?.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') render();
+    if (e.key === 'Enter') renderAll();
   });
 
   window.addEventListener('page-show', function (e) {
-    if (e.detail && e.detail.pageId === 'speeches') render();
+    if (e.detail && e.detail.pageId === 'speeches') renderAll();
   });
   window.addEventListener('hashchange', function () {
-    if (document.getElementById('page-speeches')?.classList.contains('active')) render();
+    if (document.getElementById('page-speeches')?.classList.contains('active')) renderAll();
   });
 })();

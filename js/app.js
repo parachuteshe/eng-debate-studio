@@ -132,10 +132,12 @@
     if (speechesEl) {
       try {
         const speeches = JSON.parse(localStorage.getItem('eng_debate_speeches') || '[]');
-        const list = speeches.slice(0, 3);
+        let list = speeches.slice(0, 3).map(function (s) { return { title: s.title, meta: s.source || '', url: '#/speeches' }; });
+        if (list.length === 0 && typeof FEATURED_TRANSCRIPTS !== 'undefined')
+          list = FEATURED_TRANSCRIPTS.slice(0, 3).map(function (t) { return { title: t.title, meta: t.event || 'Debating404', url: '#/speeches' }; });
         speechesEl.innerHTML = list.length
-          ? list.map(s => '<a href="#/speeches" class="home-preview-item card">' + '<span class="home-preview-title">' + escapeHtml(s.title) + '</span>' + '<span class="home-preview-meta">' + (s.source || '') + '</span></a>').join('')
-          : '<p class="text-muted">暂无辩稿，去添加第一篇吧</p>';
+          ? list.map(function (item) { return '<a href="' + item.url + '" class="home-preview-item card"><span class="home-preview-title">' + escapeHtml(item.title) + '</span><span class="home-preview-meta">' + escapeHtml(item.meta) + '</span></a>'; }).join('')
+          : '<p class="text-muted">暂无辩稿</p>';
       } catch (_) {
         speechesEl.innerHTML = '<p class="text-muted">暂无辩稿</p>';
       }
@@ -201,8 +203,12 @@
     if (favEl) {
       const favIds = profile.favoriteSpeeches || [];
       const speeches = JSON.parse(localStorage.getItem('eng_debate_speeches') || '[]');
-      const list = speeches.filter(s => favIds.includes(s.id));
-      favEl.innerHTML = list.length ? list.map(s => `<div class="list-item" onclick="location.hash='#/speeches'"><span>${escapeHtml(s.title)}</span></div>`).join('') : '<span class="text-muted">暂无收藏</span>';
+      const userFavs = speeches.filter(s => favIds.includes(s.id));
+      const featuredFavs = (typeof FEATURED_TRANSCRIPTS !== 'undefined' ? FEATURED_TRANSCRIPTS : []).filter(function (t) { return favIds.includes(t.id); });
+      const list = featuredFavs.map(function (t) { return { title: t.title, link: t.link }; }).concat(userFavs.map(function (s) { return { title: s.title, link: null }; }));
+      favEl.innerHTML = list.length ? list.map(function (s) {
+        return '<div class="list-item" onclick="location.hash=\'#/speeches\'"><span>' + escapeHtml(s.title) + '</span>' + (s.link ? '<a href="' + escapeHtml(s.link) + '" target="_blank" rel="noopener" class="btn btn-ghost" onclick="event.stopPropagation()">阅读</a>' : '') + '</div>';
+      }).join('') : '<span class="text-muted">暂无收藏</span>';
     }
 
     const stats = getDebateStats();

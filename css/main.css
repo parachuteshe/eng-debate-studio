@@ -888,6 +888,53 @@ label {
   margin-top: 4px;
 }
 
+/* 辩稿页：精选辩论稿卡片 */
+.speeches-section {
+  margin-bottom: 32px;
+}
+
+.speeches-section .section-title {
+  margin-bottom: 4px;
+}
+
+.speeches-section .section-desc {
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.transcript-card {
+  margin-bottom: 16px;
+}
+
+.transcript-event {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.transcript-title {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.transcript-motion {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.transcript-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
 /* Badges */
 .badge {
   display: inline-block;

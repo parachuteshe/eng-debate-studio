@@ -301,24 +301,38 @@
 
     <!-- Speeches -->
     <section id="page-speeches" class="page">
-      <h1>辩稿分享</h1>
-      <p class="text-muted">优秀辩稿与口语稿；支持上传、粘贴 URL 转 transcript，收藏后在个人主页可见。</p>
-      <div class="card">
-        <h3>添加辩稿</h3>
-        <label>标题</label>
-        <input type="text" id="speech-title" placeholder="辩稿标题" />
-        <label>来源 URL（如 YouTube）— 将尝试抓取 transcript</label>
-        <input type="url" id="speech-url" placeholder="https://..." />
-        <label>或直接粘贴 / 上传文本</label>
-        <input type="file" id="speech-file" accept=".txt,text/plain" />
-        <textarea id="speech-text" rows="6" placeholder="粘贴全文或上传后内容..."></textarea>
-        <button type="button" class="btn btn-primary" id="speech-submit">提交</button>
+      <h1>辩稿</h1>
+      <p class="text-muted">真实辩论全文稿，参考 <a href="https://debating404.com/category/debate-transcripts/" target="_blank" rel="noopener">Debating404 Debate Transcripts</a>；可收藏，也可添加自己的辩稿。</p>
+
+      <div class="speeches-section">
+        <h2 class="section-title">精选辩论稿</h2>
+        <p class="section-desc">WSDC / WUDC 等赛事完整辩稿，点击阅读全文跳转至来源站</p>
+        <div class="filters">
+          <input type="search" id="speech-search" placeholder="搜索辩题、赛事、队伍..." />
+          <button type="button" class="btn btn-primary" id="speech-search-btn">搜索</button>
+        </div>
+        <div id="speeches-featured"></div>
       </div>
-      <div class="filters">
-        <input type="search" id="speech-search" placeholder="搜索辩稿..." />
-        <button type="button" class="btn btn-primary" id="speech-search-btn">搜索</button>
+
+      <div class="speeches-section">
+        <h2 class="section-title">添加我的辩稿</h2>
+        <p class="section-desc">上传或粘贴辩稿内容，收藏后可在个人主页查看</p>
+        <div class="card">
+          <label>标题</label>
+          <input type="text" id="speech-title" placeholder="辩稿标题" />
+          <label>来源 URL（如 YouTube）— 可粘贴链接备注</label>
+          <input type="url" id="speech-url" placeholder="https://..." />
+          <label>粘贴或上传文本</label>
+          <input type="file" id="speech-file" accept=".txt,text/plain" />
+          <textarea id="speech-text" rows="6" placeholder="粘贴全文或上传后内容..."></textarea>
+          <button type="button" class="btn btn-primary" id="speech-submit">提交</button>
+        </div>
       </div>
-      <div id="speeches-list"></div>
+
+      <div class="speeches-section">
+        <h2 class="section-title">我的辩稿</h2>
+        <div id="speeches-list"></div>
+      </div>
     </section>
 
     <!-- 1v1 Training -->
