@@ -12,12 +12,6 @@
     <a href="#/" class="nav-brand">Eng Debate Studio</a>
     <button type="button" class="nav-toggle" aria-label="菜单"><span></span><span></span><span></span></button>
     <ul class="nav-links">
-      <li><a href="#/" data-page="home">首页</a></li>
-      <li><a href="#/motions" data-page="motions">辩题</a></li>
-      <li><a href="#/tournaments" data-page="tournaments">赛事</a></li>
-      <li><a href="#/speeches" data-page="speeches">辩稿</a></li>
-      <li><a href="#/training/1v1" data-page="training-1v1">1v1 训练</a></li>
-      <li><a href="#/training/bp" data-page="training-bp">BP 训练</a></li>
       <li class="nav-user-wrap">
         <a href="#/profile" data-page="profile" class="nav-avatar-link" id="nav-avatar-link">
           <span class="nav-avatar" id="nav-avatar">
@@ -36,119 +30,38 @@
   <main id="app">
     <!-- Home -->
     <section id="page-home" class="page">
-      <header class="hero">
-        <div class="hero-bg">
-          <img src="https://images.unsplash.com/photo-1541872703-74c0ee27668d?w=1200&q=80" alt="" class="hero-img" />
-          <span class="hero-overlay"></span>
-        </div>
-        <div class="hero-content">
-          <h1 class="hero-title">英国议会制辩论训练平台</h1>
-          <p class="hero-subtitle">与 AI 对手进行真实的 British Parliamentary 辩论训练，提升逻辑思维与口语表达</p>
-          <div class="hero-cta">
-            <a href="#/training/bp" class="btn btn-primary">开始辩论训练</a>
-            <a href="#" class="btn btn-ghost hero-btn-light" data-scroll-to="training-bp-section">了解赛制</a>
+      <header class="parliament-hero">
+        <div class="parliament-content">
+          <h1 class="parliament-title">英国议会制辩论训练平台</h1>
+          <p class="parliament-subtitle">选一个座位，开始你的辩论之旅</p>
+          <div class="parliament-seats">
+            <a href="#/motions" class="seat-card" title="辩题">
+              <span class="seat-icon">📋</span>
+              <span class="seat-label">辩题</span>
+            </a>
+            <a href="#/tournaments" class="seat-card" title="赛事">
+              <span class="seat-icon">🏆</span>
+              <span class="seat-label">赛事</span>
+            </a>
+            <a href="#/speeches" class="seat-card" title="辩稿">
+              <span class="seat-icon">📜</span>
+              <span class="seat-label">辩稿</span>
+            </a>
+            <a href="#/training/1v1" class="seat-card seat-card--primary" title="1v1 训练">
+              <span class="seat-icon">🎤</span>
+              <span class="seat-label">1v1 训练</span>
+            </a>
+            <a href="#/training/bp" class="seat-card seat-card--primary" title="BP 训练">
+              <span class="seat-icon">⚔️</span>
+              <span class="seat-label">BP 训练</span>
+            </a>
+            <a href="#/profile" class="seat-card" title="我的">
+              <span class="seat-icon">👤</span>
+              <span class="seat-label">我的</span>
+            </a>
           </div>
         </div>
       </header>
-
-      <section class="home-section" id="training-bp-section">
-        <h2 class="section-title">British Parliamentary 赛制</h2>
-        <p class="section-desc">世界大学生辩论赛制，8 人分 4 队，上下院各 2 队，考验逻辑、表达与团队协作</p>
-        <div class="bp-layout">
-          <div class="bp-half">
-            <h3>上院 (Opening Half)</h3>
-            <div class="bp-teams">
-              <div class="bp-team card">
-                <strong>Opening Government</strong>
-                <span>首相 + 副首相</span>
-              </div>
-              <div class="bp-team card">
-                <strong>Opening Opposition</strong>
-                <span>反对党领袖 + 副反对党领袖</span>
-              </div>
-            </div>
-          </div>
-          <div class="bp-half">
-            <h3>下院 (Closing Half)</h3>
-            <div class="bp-teams">
-              <div class="bp-team card">
-                <strong>Closing Government</strong>
-                <span>政府议员 + 政府党鞭</span>
-              </div>
-              <div class="bp-team card">
-                <strong>Closing Opposition</strong>
-                <span>反对党议员 + 反对党党鞭</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="section-cta">
-          <a href="#/training/bp" class="btn btn-primary">进入 BP 训练</a>
-        </div>
-      </section>
-
-      <section class="home-section home-features">
-        <h2 class="section-title">平台特色</h2>
-        <p class="section-desc">专业级辩论训练体验</p>
-        <div class="feature-grid">
-          <div class="feature-card card">
-            <span class="feature-icon">🤖</span>
-            <h3>智能 AI 对手</h3>
-            <p>每个 AI 角色都有独特的辩论风格和策略，模拟真实对手的思维方式</p>
-          </div>
-          <div class="feature-card card">
-            <span class="feature-icon">⏱️</span>
-            <h3>实时计时系统</h3>
-            <p>精确的 15 分钟准备时间和 7 分钟发言计时，完全符合 BP 赛制要求</p>
-          </div>
-          <div class="feature-card card">
-            <span class="feature-icon">📊</span>
-            <h3>数据分析</h3>
-            <p>详细的表现分析和改进建议，帮助您系统性地提升辩论技能</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="home-section home-module" id="home-module-motions">
-        <div class="home-module-header">
-          <h2 class="section-title">辩题</h2>
-          <p class="section-desc">按年份、地区筛选，支持搜索</p>
-          <a href="#/motions" class="home-module-more">查看全部 →</a>
-        </div>
-        <div class="home-module-preview" id="home-motions-preview"></div>
-      </section>
-
-      <section class="home-section home-module" id="home-module-tournaments">
-        <div class="home-module-header">
-          <h2 class="section-title">赛事</h2>
-          <p class="section-desc">进行中与即将举办的辩论赛事</p>
-          <a href="#/tournaments" class="home-module-more">查看全部 →</a>
-        </div>
-        <div class="home-module-preview" id="home-tournaments-preview"></div>
-      </section>
-
-      <section class="home-section home-module" id="home-module-speeches">
-        <div class="home-module-header">
-          <h2 class="section-title">辩稿</h2>
-          <p class="section-desc">优秀辩稿与口语稿，支持收藏</p>
-          <a href="#/speeches" class="home-module-more">查看全部 →</a>
-        </div>
-        <div class="home-module-preview" id="home-speeches-preview"></div>
-      </section>
-
-      <section class="home-section home-module home-module-1v1" id="home-module-1v1">
-        <div class="home-module-header">
-          <h2 class="section-title">1v1 训练</h2>
-          <p class="section-desc">与 AI 一对一辩论，30 分钟限时，语音输入与 AI 裁决</p>
-          <a href="#/training/1v1" class="btn btn-primary">进入 1v1 训练</a>
-        </div>
-        <div class="home-module-preview">
-          <div class="home-1v1-card card">
-            <span class="feature-icon">🎤</span>
-            <p>抽签正/反方 → 选辩题 → 语音对打 → AI 从逻辑与严谨性裁决</p>
-          </div>
-        </div>
-      </section>
     </section>
 
     <!-- Register -->
